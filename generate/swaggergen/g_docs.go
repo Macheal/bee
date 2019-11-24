@@ -556,7 +556,7 @@ func parserComments(f *ast.FuncDecl, controllerName, pkgpath string) error {
 					HTTPMethod = "GET"
 				}
 			} else if strings.HasPrefix(t, "@Title") {
-				opts.OperationID = controllerName + "." + strings.TrimSpace(t[len("@Title"):])
+				opts.OperationID = strings.TrimSpace(t[len("@Title"):])
 			} else if strings.HasPrefix(t, "@Description") {
 				opts.Description = strings.TrimSpace(t[len("@Description"):])
 			} else if strings.HasPrefix(t, "@Summary") {
@@ -802,7 +802,7 @@ func setParamType(para *swagger.Parameter, typ string, pkgpath, controllerName s
 		paraFormat = typeFormat[1]
 		if para.In == "body" {
 			para.Schema = &swagger.Schema{
-				Type: paraType,
+				Type:   paraType,
 				Format: paraFormat,
 			}
 		}
